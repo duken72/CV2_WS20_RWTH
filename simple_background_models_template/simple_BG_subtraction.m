@@ -10,7 +10,7 @@ function simple_BG_subtraction(image_path, threshold)
 % setup filelist and output figure
 filelist = dir([image_path '*.jpg']);
 %h = figure('name','1a - Simple background subtraction', 'Position', [10 10 1900 1000]);
-h = figure('name','1a - Simple background subtraction', 'Position', [10 10 1900 900]);
+h = figure('name','1a - Simple background subtraction', 'Position', [10 10 1400 700]);
 
 % use first image as BG
 %% TODO
@@ -25,7 +25,8 @@ for i=100:length(filelist)
         
     %% TODO
     %thresh_img = mean(nextim - BG, 3);
-    img_sub = max(nextim - BG_img, [], 3);
+    img_sub = sum(nextim - BG_img, 3);
+    img_sub = abs(img_sub);
     thresh_img = img_sub;
     thresh_img(thresh_img>threshold) = 1;
     
