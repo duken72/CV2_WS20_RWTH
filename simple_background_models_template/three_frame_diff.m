@@ -19,6 +19,17 @@ for i=100:length(filelist)
     nextim = im2double(imread(imname));
     
     %% TODO
+    BG_img = im2double(imread([image_path filelist(i-delay).name]));
+    thresh_img_past = abs(sum(nextim - BG_img, 3));    
+    thresh_img_past(thresh_img_past>threshold) = 1;
+    thresh_img_past(thresh_img_past<=threshold) = 0;    
+    
+    BG_img_ft = im2double(imread([image_path filelist(i+delay).name]));
+    thresh_img_ft = abs(sum(nextim - BG_img_ft, 3));    
+    thresh_img_ft(thresh_img_ft>threshold) = 1;
+    thresh_img_ft(thresh_img_ft<=threshold) = 0;
+    
+    thresh_img = and(thresh_img_past, thresh_img_ft);
     
     % create overlayed mask image
     repeat_thresh_img = repmat(thresh_img, [1 1 3]);
