@@ -17,10 +17,13 @@ H = zeros(576,768);
 for i=100:length(filelist)
     % read next image
     imname = [image_path filelist(i).name];
-    nextim = im2double(imread(imname));
-    
+    nextim = im2double(imread(imname));    
 
     %% TODO Frame Differencing
+    BG_img = im2double(imread([image_path filelist(i-delay).name]));    
+    thresh_img = abs(sum(nextim - BG_img, 3));
+    thresh_img(thresh_img>threshold) = 1;
+    thresh_img(thresh_img<=threshold) = 0;
     
     % create motion history image H
     tmp = max(H-10,0);
