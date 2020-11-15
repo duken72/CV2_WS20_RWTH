@@ -9,13 +9,11 @@ function simple_BG_subtraction(image_path, threshold)
 
 % setup filelist and output figure
 filelist = dir([image_path '*.jpg']);
-%h = figure('name','1a - Simple background subtraction', 'Position', [10 10 1900 1000]);
 h = figure('name','1a - Simple background subtraction', 'Position', [10 10 1400 700]);
 
 % use first image as BG
 %% TODO
-imname = '0001.jpg';
-BG_img = im2double(imread(imname));
+BG_img = im2double(imread('0001.jpg'));
 
 % go through remaining images
 for i=100:length(filelist)
@@ -24,11 +22,9 @@ for i=100:length(filelist)
     nextim = im2double(imread(imname));
         
     %% TODO
-    %thresh_img = mean(nextim - BG, 3);
-    img_sub = sum(nextim - BG_img, 3);
-    img_sub = abs(img_sub);
-    thresh_img = img_sub;
+    thresh_img = abs(sum(nextim - BG_img, 3));
     thresh_img(thresh_img>threshold) = 1;
+    thresh_img(thresh_img<=threshold) = 0;
     
     % create overlayed mask image
     repeat_thresh_img = repmat(thresh_img, [1 1 3]);
