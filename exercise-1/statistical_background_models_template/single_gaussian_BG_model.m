@@ -2,7 +2,6 @@ function single_gaussian_BG_model(image_path, threshold)
 %SINGLE_GAUSSIAN_BG_MODEL Summary of this function goes here
 %   Detailed explanatio
 
-
 % setup filelist and output figure
 filelist = dir([image_path '*.jpg']);
 h = figure('name','Single Gaussian Model', 'Position', [10 10 1900 1000]);
@@ -20,6 +19,8 @@ for i=1:min(100,length(filelist))
 end
 % secondly, learn mean and variance for each pixel
 %% TODO
+mean_img = mean(data_points,3);
+var_img = sqrt( sum((data_points-mean_img).^2,3) / (size(data_points,3)-1) );
 
 % go through remaining images
 for i=101:length(filelist)
@@ -29,9 +30,13 @@ for i=101:length(filelist)
     
     % compute intensity image
     %% TODO
+    intensity_img = sum(nextim,3);
     
     % thresholding
     %% TODO
+    thresh_img = abs((intensity_img - mean_img) ./ var_img);
+    thresh_img(thresh_img < threshold) = 0;
+    thresh_img(thresh_img >= threshold) = 1;
     
     % create overlayed mask image
     repeat_thresh_img = repmat(thresh_img, [1 1 3]);
@@ -52,4 +57,3 @@ for i=101:length(filelist)
 end
 
 end
-
