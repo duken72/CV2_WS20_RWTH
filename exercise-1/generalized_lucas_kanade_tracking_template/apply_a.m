@@ -4,9 +4,9 @@ function apply_a()
 
   %% Init
   window_size = 5; % window size to compute optical flow per pixel
-  sequence_name = '../sequence-02';
+  sequence_name = 'sequence-02';
   so = 0; % sequence offset, first frame in sequence
-  sequence_path = strcat(sequence_name,'/');
+  sequence_path = strcat('../', sequence_name,'/');
   filelist = dir(strcat(sequence_path,'*.jpg'));
   length(filelist);
   
