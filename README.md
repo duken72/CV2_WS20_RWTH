@@ -5,3 +5,7 @@ Exercise | Computer Vision 2 | WS20 | RWTH Aachen
 ```matlab
 addpath(genpath(pwd))
 ```
+BL
+Amina Khakimova
+Frieder
+Narek
