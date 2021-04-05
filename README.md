@@ -28,6 +28,6 @@ addpath(genpath(pwd))
 - SLAM Graph Optimization
 
 ##### Black list:
-Amina Khakimova
-Frieder
-Narek
+Amina Khakimova,
+Frieder,
+Narek,
