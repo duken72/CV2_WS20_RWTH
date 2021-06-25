@@ -30,4 +30,8 @@ addpath(genpath(pwd))
 ##### Black list:
 Amina Khakimova,
 Frieder,
-Narek,
+Narek
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
